@@ -10,13 +10,26 @@ The shadowy stranger greets you and says 'Welcome to your new job! You are now o
 
 You look around, notice some high end coffee and tea machines, an air hockey table, nap rooms and floor to ceiling windows with a view of outer space. The shadowy stranger takes you to your desk which has a fancy sit-to stand adjustable hight desk with a swing bar, two big monitors, and Herman Miller chair. You say to yourself 'Not bad! Not bad at all!'
 
-## Set up
+## Setup
 
-Start `Mongo`, by typing `mongod`, if you don't already have it running.
+* **Fork** and **Clone** this repository!
+* Do the assignment!
+* To turn this assignment in:
+    * Record your terminal command history inside the `answers.txt` file!
+    * Push to your fork of the repository
+    * Make a **Pull Request** against the base repository
 
-Open a new tab and start a Mongo shell if you don't have it running by typing `mongo`
+## Getting Started
 
-connect to a new sub-database by typing
+Open a new tab and start a Mongo shell by typing `mongosh`
+
+> Note: If you're using an older version of MongoDB that doesn't come with the `mongosh` program, use the older `mongo` program instead!
+
+>  If the mongo service isn't already running, you can start it automatically as a background process with:
+`brew services start mongodb-community`
+or manually with `mongod`
+
+Connect to a new sub-database by typing:
 
 ```
 use hunters
@@ -37,8 +50,7 @@ We should get an `ok` message.
 Let's add our first bounty
 
 ```js
-
-db.bounties.insert(
+db.bounties.insertOne(
   {
     name: 'Han Solo',
     wantedFor : 'Owing money',
@@ -48,12 +60,12 @@ db.bounties.insert(
     hunters :['Bobba Fett', 'Dengar', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM'],
     captured: false
   }
-  )
+)
 ```
 
 You should get an ok message that looks similar to this:
 
-![Insert ok](https://i.imgur.com/KdFh4Ss.png)
+![Insert ok](https://i.imgur.com/HDXJsAt.png)
 
 Using the above template, make another bounty
 
@@ -61,7 +73,7 @@ Now insert a few more bounties
 
 ```js
 
-db.bounties.insert([
+db.bounties.insertMany([
   {
     name: 'Han Solo',
     wantedFor : 'Owing money',
@@ -154,6 +166,10 @@ Check out the [Intermediate Mongo](https://gawdiseattle.gitbook.io/wdi/04-databa
 
 Put your terminal output (let's say the last 50 lines or so, not everything you ever did!) into the file in this directory called `answers.txt`.
 
-Get your Mongo shell history with the following command: `tail -50 ~/.dbshell`
+If you're using `mongosh`, get your shell history with the following command: `head -50 ~/.mongodb/mongosh/mongosh_repl_history`
+
+If you're using the `mongo`, get your shell history with the following command: `tail -50 ~/.dbshell`
 
 ### That's it! You're all done!
+
+![Relax](https://media.giphy.com/media/hR7yR2AMVxv8c/giphy.gif)
