@@ -1,1 +1,1664 @@
-Please replace this text with ~50 lines of terminal history.
+use hunters
+switched to db hunters
+hunters> db.createCollection('bounties')
+{ ok: 1 }
+hunters> db.bounties.insertOne({
+... name: 'Han Solo',
+... wantedFor : 'Owing money',
+... client : 'Jabba the Hut',
+... reward : 1000000,
+... ship: 'Millennium Falcon',
+... hunters :['Bobba Fett', 'Dengar', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM'],
+... captured: false 
+... })
+{
+  acknowledged: true,
+  insertedId: ObjectId("61e735fa8078d8f2dbd416dc")
+}
+hunters> show collections
+bounties
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e735fa8078d8f2dbd416dc"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  }
+]
+hunters> db.bounties.insertMany([{
+... name: 'Han Solo',
+... wantedFor : 'Owing money',
+... client : 'Jabba the Hut',
+... reward : 1000000,
+... ship: 'Millennium Falcon',
+... hunters :['Bobba Fett', 'Dengar', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM'],
+... captured: false
+... },{
+... name: 'Rocket',
+...     wantedFor : 'Stealing Batteries',
+...     client : 'Ayesha High Priestess of the Sovereign',
+...     reward : 1000000000,
+...     ship: 'The Milano',
+...     hunters :['Nebula', 'Ravagers'],
+...     captured: false
+... },{
+... name: 'Sara Lance',
+...     wantedFor : 'Screwing up the timeline, causing anachronisms',
+...     client : 'Time Bureau',
+...     reward : 50000,
+...     ship: 'Waverider',
+...     hunters :['Chronos'],
+...     captured: false
+... },{
+... name: 'Malcolm Reynolds',
+...     wantedFor : 'Aiming to misbehave',
+...     client : 'The Alliance',
+...     reward : 40000,
+...     ship: 'Serenity',
+...     hunters :['Jubal Early'],
+...     captured: false
+... },{
+... name: 'Starbuck',
+...     wantedFor : "Disobeying Captain's orders",
+...     client : 'Captain Adama',
+...     ship: 'Demetrius',
+...     reward : 1000,
+...     hunters :['Apollo'],
+...     captured: true
+... }])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("61e737058078d8f2dbd416dd"),
+    '1': ObjectId("61e737058078d8f2dbd416de"),
+    '2': ObjectId("61e737058078d8f2dbd416df"),
+    '3': ObjectId("61e737058078d8f2dbd416e0"),
+    '4': ObjectId("61e737058078d8f2dbd416e1")
+  }
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e735fa8078d8f2dbd416dc"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'Sara Lance',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e1"),
+    name: 'Starbuck',
+    wantedFor: "Disobeying Captain's orders",
+    client: 'Captain Adama',
+    ship: 'Demetrius',
+    reward: 1000,
+    hunters: [ 'Apollo' ],
+    captured: true
+  }
+]
+hunters> db.bounties.find({client: {$eq: 'Time Bureau'}})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'Sara Lance',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  }
+]
+hunters> db.bounties.find({captured: {$eq: true}})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e1"),
+    name: 'Starbuck',
+    wantedFor: "Disobeying Captain's orders",
+    client: 'Captain Adama',
+    ship: 'Demetrius',
+    reward: 1000,
+    hunters: [ 'Apollo' ],
+    captured: true
+  }
+]
+hunters> db.bounties.insertOne({
+... name: 'Deadpool',
+... wantedFor: 'Unintentional killing of bystanders',
+... client: 'Steve Rogers',
+... reward: 10000000,
+... ship: 'Helicarrier',
+... hunters: [ 'Wolverine', 'Cable' ],
+... captured: false
+... })
+{
+  acknowledged: true,
+  insertedId: ObjectId("61e73bd38078d8f2dbd416e2")
+}
+hunters> db.bounties.find({name: {$eq: 'Deadpool'}})
+[
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.find({}, {name: 1})
+[
+  { _id: ObjectId("61e735fa8078d8f2dbd416dc"), name: 'Han Solo' },
+  { _id: ObjectId("61e737058078d8f2dbd416dd"), name: 'Han Solo' },
+  { _id: ObjectId("61e737058078d8f2dbd416de"), name: 'Rocket' },
+  { _id: ObjectId("61e737058078d8f2dbd416df"), name: 'Sara Lance' },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds'
+  },
+  { _id: ObjectId("61e737058078d8f2dbd416e1"), name: 'Starbuck' },
+  { _id: ObjectId("61e73bd38078d8f2dbd416e2"), name: 'Deadpool' }
+]
+hunters> db.bounties.find({}, {name: 1, _id: 0})
+[
+  { name: 'Han Solo' },
+  { name: 'Han Solo' },
+  { name: 'Rocket' },
+  { name: 'Sara Lance' },
+  { name: 'Malcolm Reynolds' },
+  { name: 'Starbuck' },
+  { name: 'Deadpool' }
+]
+hunters> db.bounties.deleteOne({name: 'Starbuck'})
+{ acknowledged: true, deletedCount: 1 }
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e735fa8078d8f2dbd416dc"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'Sara Lance',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.deleteOne({name: 'Han Solo'})
+{ acknowledged: true, deletedCount: 1 }
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'Sara Lance',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({name: 'Sara Lance'}, {$set: {name: 'White Canary'}})
+DeprecationWarning: Collection.update() is deprecated. Use updateOne, updateMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({ship: 'The Milano'}, {$set: {ship: 'The Milano 2'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.find({reward: {$gt: 100000}})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.find({reward: {$lt: 1000}})
+
+hunters> db.bounties.find({reward: {$lte: 1000}})
+
+hunters> db.bounties.find({hunters: 'Nebula'})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  }
+]
+hunters> db.bounties.find({ $or: [{ship: 'Waverider'},{ship: 'Serenity'}]})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  }
+]
+hunters> db.bounties.find({captured: false, client: 'Ayesha High Priestess of the Sovereign'})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({}, {$inc: reward: 333333}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:36)
+
+> 1 | db.bounties.update({}, {$inc: reward: 333333}})
+    |                                     ^
+  2 |
+
+hunters> db.bounties.update({}, {$inc: {reward: 333333}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1333333,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({}, {$inc: {reward: -333333}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.updateMany({}, {$inc: {reward: -333333}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 666667,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 999666667,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: -283333,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: -293333,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 9666667,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.updateMany({}, {$inc: {reward: 333333}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1000000,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000000000,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 50000,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 40000,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10000000,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.updateMany({}, {$inc: {reward: 333333}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 1333333,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 1000333333,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 383333,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 373333,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 10333333,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.updateMany({}, {$mul: {reward: 2}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({hunters: ['Junal Early']}, {$push: {hunters: 'Bobba Fett'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({hunters: ['Jubal Early']}, {$push: {hunters: 'Bobba Fett'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({hunters: ['Chronos']}, {$push: {hunters: 'Bobba Fett'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({hunters: 'dengar'},{$unset: {hunters: 'dengar'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({hunters: 'dengar'},{$pull: {hunters: 'dengar'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [
+      'Bobba Fett',
+      'Dengar',
+      'IG-88',
+      'Zuckuss',
+      'Greedo',
+      'Bossk',
+      '4-LOM'
+    ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({hunters: 'dengar'},{$pull: {hunters: 'Dengar'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+hunters> db.bounties.update({name: 'Han Solo'},{$pull: {hunters: 'Dengar'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [ 'Bobba Fett', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.update({ name: "Han Solo"}, {lastSeen: "yesterday"}, {upsert:true})
+MongoInvalidArgumentError: Update document requires atomic operators
+hunters> db.bounties.update({ name: 'Han Solo'}, {name: 'Han Solo', lastSeen: 'yesterday'}, {upsert: true})
+MongoInvalidArgumentError: Update document requires atomic operators
+hunters> db.bounties.update({ name: 'Han Solo'}, {name: 'Han Solo', lastSeen: 'yesterday'}, {$set:{upsert: true}})
+MongoInvalidArgumentError: Update document requires atomic operators
+hunters> db.bounties.update({ name: 'Han Solo'}, {$set: { lastSeen: 'yesterday'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+hunters> db.bounties.find({name: 'Han Solo'})
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [ 'Bobba Fett', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  }
+]
+hunters> db.bounties.updateMany({name:{ $nin: 'Han Solo'}}, {$set: { lastSeen: 'yesterday'}})
+MongoServerError: $nin needs an array
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [ 'Bobba Fett', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false
+  }
+]
+hunters> db.bounties.updateMany({name:{ $nin: ['Han Solo']}}, {$set: { lastSeen: 'yesterday'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 4,
+  modifiedCount: 4,
+  upsertedCount: 0
+}
+hunters> db.bountines.find()
+
+hunters> db.bounties.find()
+[
+  {
+    _id: ObjectId("61e737058078d8f2dbd416dd"),
+    name: 'Han Solo',
+    wantedFor: 'Owing money',
+    client: 'Jabba the Hut',
+    reward: 2666666,
+    ship: 'Millennium Falcon',
+    hunters: [ 'Bobba Fett', 'IG-88', 'Zuckuss', 'Greedo', 'Bossk', '4-LOM' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416de"),
+    name: 'Rocket',
+    wantedFor: 'Stealing Batteries',
+    client: 'Ayesha High Priestess of the Sovereign',
+    reward: 2000666666,
+    ship: 'The Milano 2',
+    hunters: [ 'Nebula', 'Ravagers' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416df"),
+    name: 'White Canary',
+    wantedFor: 'Screwing up the timeline, causing anachronisms',
+    client: 'Time Bureau',
+    reward: 766666,
+    ship: 'Waverider',
+    hunters: [ 'Chronos', 'Bobba Fett' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  },
+  {
+    _id: ObjectId("61e737058078d8f2dbd416e0"),
+    name: 'Malcolm Reynolds',
+    wantedFor: 'Aiming to misbehave',
+    client: 'The Alliance',
+    reward: 746666,
+    ship: 'Serenity',
+    hunters: [ 'Jubal Early', 'Bobba Fett' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  },
+  {
+    _id: ObjectId("61e73bd38078d8f2dbd416e2"),
+    name: 'Deadpool',
+    wantedFor: 'Unintentional killing of bystanders',
+    client: 'Steve Rogers',
+    reward: 20666666,
+    ship: 'Helicarrier',
+    hunters: [ 'Wolverine', 'Cable' ],
+    captured: false,
+    lastSeen: 'yesterday'
+  }
+]
+hunters> head -50 ~/.mongodb/mongosh/mongosh_repl_history
+Uncaught:
+SyntaxError: Missing semicolon. (1:8)
+
+> 1 | head -50 ~/.mongodb/mongosh/mongosh_repl_history
+    |         ^
+  2 |
+
+hunters> $ mongosh
+Uncaught:
+SyntaxError: Missing semicolon. (1:1)
+
+> 1 | $ mongosh
+    |  ^
+  2 |
+
+hunters> exit
+➜  mongo-bounty-hunters git:(master) $ mongosh
+zsh: command not found: $
+➜  mongo-bounty-hunters git:(master) ~/.mongodb/mongosh/mongosh_repl_history
+zsh: permission denied: /Users/caniggiathompson/.mongodb/mongosh/mongosh_repl_history
+➜  mongo-bounty-hunters git:(master) sudo ~/.mongodb/mongosh/mongosh_repl_history
+Password:
+sudo: /Users/caniggiathompson/.mongodb/mongosh/mongosh_repl_history: command not found
+➜  mongo-bounty-hunters git:(master) mongosh
+Current Mongosh Log ID:	
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000
+Using MongoDB:		5.0.5
+Using Mongosh:		1.1.8
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting:
+   2022-01-14T15:49:34.565-05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> ~/.mongodb/mongosh/mongosh_repl_history
+Uncaught:
+SyntaxError: Invalid regular expression flag. (1:13)
+
+> 1 | ~/.mongodb/mongosh/mongosh_repl_history
+    |              ^
+  2 |
+
+test> ~/.mongodb/mongosh/.mongosh_repl_history
+Uncaught:
+SyntaxError: Invalid regular expression flag. (1:13)
+
+> 1 | ~/.mongodb/mongosh/.mongosh_repl_history
+    |              ^
+  2 |
+
+test> 
